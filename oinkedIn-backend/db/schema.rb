@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20180209013031) do
   create_table "shapes", force: :cascade do |t|
     t.integer "x_coord"
     t.integer "y_coord"
+    t.integer "direction"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
