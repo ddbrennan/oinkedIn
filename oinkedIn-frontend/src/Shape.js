@@ -1,9 +1,31 @@
 import React from "react";
+import VideoChat from "./VideoChat"
+import { API_ROOT, HEADERS } from './constants';
+
+
 
 class Shape extends React.Component {
 
   componentDidMount = () => {
     window.addEventListener("keydown", this.moveSquare)
+  }
+
+
+
+  updateShapeStream = (stream) => {
+    const mediastream = window.URL.createObjectURL(stream)
+    console.log(stream)
+    console.log(mediastream)
+
+
+    fetch(`${API_ROOT}/shapes/${this.props.id}`, {
+      method: "PATCH",
+      headers: HEADERS,
+      body: JSON.stringify({
+        "mediastream": mediastream
+      })
+    })
+
   }
 
   moveSquare = (e) => {
@@ -30,6 +52,21 @@ class Shape extends React.Component {
       }
     }
     // this.props.updateShape(this.props.id, this.state.x, this.state.y)
+  }
+
+  componentWillUnmount(){
+    fetch(`${API_ROOT}/shapes/${this.props.id}`, {
+      method: "DELETE",
+      headers: HEADERS
+    })
+  }
+
+  renderEyes(){
+    if (this.props.mediastream) {
+      return null
+    } else {
+      return <div className="eyes"></div>
+    }
   }
 
   render() {

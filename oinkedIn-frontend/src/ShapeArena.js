@@ -12,12 +12,12 @@ class ShapeArena extends React.Component {
   componentDidMount = () => {
     fetch(`${API_ROOT}/shapes`)
       .then(res => res.json())
-      .then(shapes => this.setState({ shapes }), console.log(this.state.shapes, "hi"));
+      .then(shapes => this.setState({ shapes }));
   };
 
   handleReceivedShape = response => {
     const { shape } = response;
-    // console.log("received: ", shape)
+
 
     let foundShape = this.state.shapes.find(s => s.id === shape.id)
     let arr = this.state.shapes
@@ -49,7 +49,7 @@ class ShapeArena extends React.Component {
   addShape = async () => {
     if (!this.state.generatedShape) {
       let id = this.fakeId()
-      let newShape = { x_coord: 50, y_coord: 50, id: id, direction: 1 }
+      let newShape = { x_coord: 300, y_coord: 300, id: id, direction: 1 }
 
       await fetch(`${API_ROOT}/shapes`, {
         method: "POST",

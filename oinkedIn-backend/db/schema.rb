@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20180209013031) do
     t.integer "x_coord"
     t.integer "y_coord"
     t.integer "direction"
+    t.binary "mediastream", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

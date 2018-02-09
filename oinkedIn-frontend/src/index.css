@@ -48,6 +48,22 @@ html {
   z-index: 0;
 }
 
+.video-chat-container {
+  border-radius: 100%;
+  overflow: hidden;
+  height: inherit;
+  width: inherit;
+  position: absolute;
+  z-index: 0;
+}
+
+.video-chat {
+  left: -35%;
+  position: absolute;
+  height: 130%;
+  z-index: 0;
+}
+
 .stomach {
   height: 200px;
   width: 270px;
