@@ -5,7 +5,7 @@ class VideoChat extends React.Component {
   state = { stream: ""}
 
   componentDidMount = () => {
-    console.log(this.props)
+    console.log("mounted", this.props)
 
     if (this.props.activePig){
       // console.log('success')

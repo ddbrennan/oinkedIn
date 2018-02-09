@@ -13,6 +13,7 @@ class Pig extends React.Component {
 
 
   updatePigStream = (stream) => {
+    console.log("wuttup")
     const mediastream = window.URL.createObjectURL(stream)
     console.log(stream)
     console.log(mediastream)
@@ -79,6 +80,9 @@ class Pig extends React.Component {
           "transform": `scaleX(${this.props.direction})`
         }}>
       	<div className="face">
+          <div className="video-chat-container">
+            <VideoChat activePig={this.props.activePig} source={this.props.source} updatePigStream={this.updatePigStream}/>
+          </div>
       		<div className="left_ear"></div>
       		<div className="right_ear"></div>
       		<div className="eyes"></div>
