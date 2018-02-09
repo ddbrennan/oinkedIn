@@ -1,0 +1,39 @@
+.welcome-page {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-image: url("https://kids.nationalgeographic.com/content/dam/kids/photos/animals/Mammals/H-P/pig-young-closeup.ngsversion.1412640764383.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  align-items: center;
+}
+
+#welcome-message {
+  top: 20%;
+  position: absolute;
+  width:100%;
+  margin: auto;
+  text-align: center;
+}
+
+#welcome-message h1 {
+  font-size: 3em;
+  text-align: center
+}
+
+#new-piggy-form {
+  top: 50%;
+  left: 30%;
+  position: fixed;
+  margin: auto;
+  /* position: absolute; */
+  align-content: center;
+}
+
+#new-piggy-name {
+  width: 100%;
+  padding: 0.2em;
+  font-size: 3em;
+  text-align: center
+}

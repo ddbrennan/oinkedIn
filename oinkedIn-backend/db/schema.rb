@@ -15,10 +15,11 @@ ActiveRecord::Schema.define(version: 20180209013031) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "shapes", force: :cascade do |t|
+  create_table "pigs", force: :cascade do |t|
     t.integer "x_coord"
     t.integer "y_coord"
     t.integer "direction"
+    t.binary "mediastream", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

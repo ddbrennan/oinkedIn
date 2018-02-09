@@ -1,0 +1,3 @@
+class Pig < ApplicationRecord
+
+end
