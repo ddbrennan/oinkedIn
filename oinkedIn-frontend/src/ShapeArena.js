@@ -49,7 +49,7 @@ class ShapeArena extends React.Component {
   addShape = async () => {
     if (!this.state.generatedShape) {
       let id = this.fakeId()
-      let newShape = { x_coord: 50, y_coord: 50, id: id }
+      let newShape = { x_coord: 50, y_coord: 50, id: id, direction: 1 }
 
       await fetch(`${API_ROOT}/shapes`, {
         method: "POST",
@@ -69,7 +69,7 @@ class ShapeArena extends React.Component {
     return "" + time.getHours() + time.getMinutes() + time.getSeconds()
   }
 
-  updateShape = (id, x, y) => {
+  updateShape = (id, x, y, direction) => {
     let arr = this.state.shapes
     let shape = arr[arr.findIndex(s => s.id === id)]
     // console.log(id, x, y);
@@ -79,6 +79,7 @@ class ShapeArena extends React.Component {
 
     shape.x_coord = x
     shape.y_coord = y
+    shape.direction = direction
 
     // console.log("second", shape, id)
 
@@ -110,6 +111,7 @@ class ShapeArena extends React.Component {
             id={s.id}
             x={s.x_coord}
             y={s.y_coord}
+            direction={s.direction}
             color={s.id % 2 ? "blue" : "red"}
             updateShape={this.updateShape}/>)}
         </div>

@@ -20,7 +20,7 @@ class ShapesController < ApplicationController
     def update
 
       @shape = Shape.find(shape_params[:id])
-      if @shape.update(x_coord: shape_params[:x_coord], y_coord: shape_params[:y_coord])
+      if @shape.update(x_coord: shape_params[:x_coord], y_coord: shape_params[:y_coord], direction: shape_params[:direction])
         serialized_data = ActiveModelSerializers::Adapter::Json.new(
           ShapesSerializer.new(@shape)
         ).serializable_hash
@@ -32,6 +32,6 @@ class ShapesController < ApplicationController
     private
 
       def shape_params
-        params.permit(:x_coord, :y_coord, :id)
+        params.permit(:x_coord, :y_coord, :direction, :id)
       end
 end
