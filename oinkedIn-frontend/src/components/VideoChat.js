@@ -7,10 +7,10 @@ class VideoChat extends React.Component {
   componentDidMount = () => {
     console.log(this.props)
 
-    if (this.props.activeShape){
+    if (this.props.activePig){
       // console.log('success')
       navigator.mediaDevices.getUserMedia({video: true, audio: true})
-        .then(this.props.updateShapeStream)
+        .then(this.props.updatePigStream)
         .catch(this.handleMediaError)
     }
   }

@@ -1,10 +1,10 @@
 import React from "react";
 import VideoChat from "./VideoChat"
-import { API_ROOT, HEADERS } from './constants';
+import { API_ROOT, HEADERS } from '../constants';
 
 
 
-class Shape extends React.Component {
+class Pig extends React.Component {
 
   componentDidMount = () => {
     window.addEventListener("keydown", this.moveSquare)
@@ -12,13 +12,13 @@ class Shape extends React.Component {
 
 
 
-  updateShapeStream = (stream) => {
+  updatePigStream = (stream) => {
     const mediastream = window.URL.createObjectURL(stream)
     console.log(stream)
     console.log(mediastream)
 
 
-    fetch(`${API_ROOT}/shapes/${this.props.id}`, {
+    fetch(`${API_ROOT}/pigs/${this.props.id}`, {
       method: "PATCH",
       headers: HEADERS,
       body: JSON.stringify({
@@ -29,33 +29,33 @@ class Shape extends React.Component {
   }
 
   moveSquare = (e) => {
-    if (this.props.activeShape) {
+    if (this.props.activePig) {
       switch(e.which) {
         case 87:
 
-          this.props.updateShape(this.props.id, this.props.x - 10, this.props.y, this.props.direction)
+          this.props.updatePig(this.props.id, this.props.x - 10, this.props.y, this.props.direction)
 
           // this.setState({x: this.state.x - 10})
           break;
         case 83:
-          this.props.updateShape(this.props.id, this.props.x + 10, this.props.y, this.props.direction)
+          this.props.updatePig(this.props.id, this.props.x + 10, this.props.y, this.props.direction)
           // this.setState({x: this.state.x + 10})
           break;
         case 65:
-          this.props.updateShape(this.props.id, this.props.x, this.props.y - 10, 1)
+          this.props.updatePig(this.props.id, this.props.x, this.props.y - 10, 1)
           // this.setState({y: this.state.y - 10})
           break;
         case 68:
-          this.props.updateShape(this.props.id, this.props.x, this.props.y + 10, -1)
+          this.props.updatePig(this.props.id, this.props.x, this.props.y + 10, -1)
           // this.setState({y: this.state.y + 10})
           break;
       }
     }
-    // this.props.updateShape(this.props.id, this.state.x, this.state.y)
+    // this.props.updatePig(this.props.id, this.state.x, this.state.y)
   }
 
   componentWillUnmount(){
-    fetch(`${API_ROOT}/shapes/${this.props.id}`, {
+    fetch(`${API_ROOT}/pigs/${this.props.id}`, {
       method: "DELETE",
       headers: HEADERS
     })
@@ -94,4 +94,4 @@ class Shape extends React.Component {
     )
   }
  }
-export default Shape
+export default Pig
