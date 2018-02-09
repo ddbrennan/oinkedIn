@@ -112,6 +112,7 @@ class PigPen extends React.Component {
             x={s.x_coord}
             y={s.y_coord}
             direction={s.direction}
+            source={s.mediastream}
             color={s.id % 2 ? "blue" : "red"}
             updatePig={this.updatePig}/>)}
         </div>
