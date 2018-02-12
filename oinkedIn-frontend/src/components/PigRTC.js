@@ -6,8 +6,16 @@ import { API_ROOT, HEADERS } from '../constants';
 
 class Pig extends React.Component {
 
+
   componentDidMount = () => {
+    this.connectToRTC()
     window.addEventListener("keydown", this.moveSquare)
+  }
+
+  connectToRTC = () => {
+    this.props.peerConnection.createOffer().then(function(offer) {
+      return this.props.peerConnection.setLocalDescription(new RTCSessionDescription(offer));
+    }).then(this.props.sendLocalDescription)
   }
 
 
@@ -35,7 +43,7 @@ class Pig extends React.Component {
         case 87:
 
           return this.props.updatePig(this.props.id, this.props.x - 10, this.props.y, this.props.direction)
-          
+
           // this.setState({x: this.state.x - 10})
         case 83:
           return this.props.updatePig(this.props.id, this.props.x + 10, this.props.y, this.props.direction)
