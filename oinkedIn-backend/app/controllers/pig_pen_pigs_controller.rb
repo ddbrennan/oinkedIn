@@ -33,6 +33,6 @@ class PigPenPigsController < ApplicationController
   private
 
   def pig_pen_pig_params
-    params.require(:pig_pen_pig).permit(:pig_id, :pig_pen_id, :direction, :x_coord, :y_coord, :z_index)
+    params.require(:pig_pen_pig).permit(:id, :pig_id, :pig_pen_id, :direction, :x_coord, :y_coord, :z_index)
   end
 end

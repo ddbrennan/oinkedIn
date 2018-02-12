@@ -52,7 +52,7 @@ class Lobby extends React.Component {
   render() {
     return (
       <div className="lobby">
-        {this.state.userPig && <Pig className="lobby-pig" pig={this.state.userPig}/>}
+        {this.props.userPig && <Pig className="lobby-pig" pig={this.state.userPig}/>}
         <button onClick={this.headToHogwash}>Head to the Hogwash!</button>
         <div id="pig-pen-list">
           <ActionCable

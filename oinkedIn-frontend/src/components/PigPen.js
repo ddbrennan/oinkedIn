@@ -5,7 +5,6 @@ import { ActionCable } from 'react-actioncable-provider';
 
 class PigPen extends React.Component {
 
-
   constructor(props) {
     super(props)
     this.state = {
@@ -16,7 +15,6 @@ class PigPen extends React.Component {
       this.state.pigPenId = props.routerProps.match.params.id
     }
   }
-
 
 
   componentDidMount = () => {
@@ -111,7 +109,7 @@ class PigPen extends React.Component {
 
     // console.log("second", pig, id)
 
-    fetch(`${API_ROOT}/pigs/${pig.id}`, {
+    fetch(`${API_ROOT}/pig_pen_pigs/${pig.id}`, {
       method: "PATCH",
       headers: HEADERS,
       body: JSON.stringify(pig)
@@ -130,7 +128,7 @@ class PigPen extends React.Component {
        onReceived={this.handleReceivedPig}
        />
       {this.state.pigs.map(s => <Pig
-          activePig={parseInt(s.id) === parseInt(this.state.generatedPig)}
+          activePig={parseInt(s.pig_id) === parseInt(this.props.userPig.id)}
           key={s.id}
           id={s.id}
           x={s.x_coord}
@@ -145,20 +143,3 @@ class PigPen extends React.Component {
 }
 
 export default PigPen
-
-// <div>
-//   <ActionCable
-//  channel={{ channel: 'PigPenPigsChannel', pig_pen: this.state.pigPenId }}
-//  onReceived={this.handleReceivedPig}
-//  />
-// {this.state.pigs.map(s => <Pig
-//     activePig={parseInt(s.id) === parseInt(this.state.generatedPig)}
-//     key={s.id}
-//     id={s.id}
-//     x={s.x_coord}
-//     y={s.y_coord}
-//     direction={s.direction}
-//     source={s.mediastream}
-//     color={s.id % 2 ? "blue" : "red"}
-//     updatePig={this.updatePig}/>)}
-// </div>

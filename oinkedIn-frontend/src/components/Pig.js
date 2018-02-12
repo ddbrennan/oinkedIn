@@ -7,35 +7,33 @@ import { API_ROOT, HEADERS } from '../constants';
 class Pig extends React.Component {
 
   componentDidMount = () => {
-    window.addEventListener("keydown", this.moveSquare)
+    window.addEventListener("keydown", this.movePig)
   }
 
 
 
-  updatePigStream = (stream) => {
-    console.log("wuttup")
-    const mediastream = window.URL.createObjectURL(stream)
-    console.log(stream)
-    console.log(mediastream)
+  // updatePigStream = (stream) => {
+  //   console.log("wuttup")
+  //   const mediastream = window.URL.createObjectURL(stream)
+  //   console.log(stream)
+  //   console.log(mediastream)
+  //
+  //
+  //   fetch(`${API_ROOT}/pigs/${this.props.id}`, {
+  //     method: "PATCH",
+  //     headers: HEADERS,
+  //     body: JSON.stringify({
+  //       "mediastream": mediastream
+  //     })
+  //   })
+  //
+  // }
 
-
-    fetch(`${API_ROOT}/pigs/${this.props.id}`, {
-      method: "PATCH",
-      headers: HEADERS,
-      body: JSON.stringify({
-        "mediastream": mediastream
-      })
-    })
-
-  }
-
-  moveSquare = (e) => {
+  movePig = (e) => {
     if (this.props.activePig) {
       switch(e.which) {
         case 87:
-
           return this.props.updatePig(this.props.id, this.props.x - 10, this.props.y, this.props.direction)
-          
           // this.setState({x: this.state.x - 10})
         case 83:
           return this.props.updatePig(this.props.id, this.props.x + 10, this.props.y, this.props.direction)
@@ -51,21 +49,6 @@ class Pig extends React.Component {
     // this.props.updatePig(this.props.id, this.state.x, this.state.y)
   }
 
-  componentWillUnmount(){
-    fetch(`${API_ROOT}/pigs/${this.props.id}`, {
-      method: "DELETE",
-      headers: HEADERS
-    })
-  }
-
-  renderEyes(){
-    if (this.props.mediastream) {
-      return null
-    } else {
-      return <div className="eyes"></div>
-    }
-  }
-
   render() {
     // console.log(this.props)
     return (
@@ -76,9 +59,6 @@ class Pig extends React.Component {
           "transform": `scaleX(${this.props.direction})`
         }}>
       	<div className="face">
-          <div className="video-chat-container">
-            <VideoChat activePig={this.props.activePig} source={this.props.source} updatePigStream={this.updatePigStream}/>
-          </div>
       		<div className="left_ear"></div>
       		<div className="right_ear"></div>
       		<div className="eyes"></div>
