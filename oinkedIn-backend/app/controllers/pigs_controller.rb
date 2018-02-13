@@ -6,11 +6,8 @@ class PigsController < ApplicationController
     end
 
     def create
-      @pig = Pig.new(pig_params)
-      @pig.id = pig_params[:id]
-      if @pig.save
-        render json: @pig
-      end
+      @pig = Pig.find_or_create_by(name: pig_params[:name])
+      render json: @pig
     end
 
     def update
@@ -23,6 +20,6 @@ class PigsController < ApplicationController
   private
 
   def pig_params
-    params.require(:pig).permit(:id, :color, :greased, :fitness)
+    params.require(:pig).permit(:id, :name, :color, :greased, :fitness)
   end
 end

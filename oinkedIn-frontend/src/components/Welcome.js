@@ -1,8 +1,19 @@
 import React from "react";
 
 class Welcome extends React.Component {
-  constructor(props) {
-    super(props);
+  state = {
+    pigName: ""
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    this.props.setUserPig(this.state.pigName)
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      pigName: e.target.value
+    })
   }
 
   render() {
@@ -11,8 +22,8 @@ class Welcome extends React.Component {
         <div id="welcome-message">
           <h1>Welcome, y'oinker!</h1>
         </div>
-        <form id="new-piggy-form" onSubmit={console.log}>
-          <input id="new-piggy-name" type="text" placeholder="Type your piggy name..." />
+        <form id="new-piggy-form" onSubmit={this.handleSubmit}>
+          <input id="new-piggy-name" type="text" value={this.state.pigName} onChange={this.handleChange} placeholder="Type your piggy name..." />
           <input type="submit" value="Be A Piggy" hidden />
         </form>
       </div>

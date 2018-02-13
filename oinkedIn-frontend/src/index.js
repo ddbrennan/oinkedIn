@@ -7,9 +7,12 @@ import './stylesheets/welcome.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { API_WS_ROOT } from './constants';
+import { BrowserRouter as Router } from 'react-router-dom'
 
 ReactDOM.render(
   <ActionCableProvider url={API_WS_ROOT}>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </ActionCableProvider>, document.getElementById('root'));
 registerServiceWorker();
