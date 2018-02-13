@@ -2,73 +2,75 @@ import React from "react";
 import Pig from "./Pig"
 import { API_ROOT, HEADERS } from '../constants';
 import { ActionCable } from 'react-actioncable-provider';
+import LoggedIn from "../hoc/LoggedIn"
+
 
 class PigPen extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      pigs: []
-    }
 
-    if (props.routerProps.match) {
-      this.state.pigPenId = props.routerProps.match.params.id
+    this.state = {
+      pigs: [],
+      pigPenId: props.routerProps.match.params.id
     }
   }
 
 
   componentDidMount = () => {
+    if (!this.props.userPig){
+      this.props.routerProps.history.push("/")
+    }
     fetch(`${API_ROOT}/pig_pens/${this.state.pigPenId}`)
       .then(res => res.json())
-      .then(this.setPigsInState)
+      .then(pigs => this.setState({ pigs }))
       // .then(pigs => this.setState({ pigs }));
   };
 
-  setPigsInState = (json) => {
-    console.log(json)
+  // setPigsInState = (json) => {
+  //   console.log("json: ", json)
+  //
+  //   const newPigArr = json.pigs.map(pig => {
+  //     const pig_pen_pig = json.pig_pen_pigs.find(ppp => ppp.pig_id === pig.id)
+  //     return {...pig, ...pig_pen_pig}
+  //   })
+  //
+  //   this.setState({
+  //     pigs: newPigArr
+  //   })
+  // }
 
 
-    const newPigArr = json.pigs.map(pig => {
-      const pig_pen_pig = json.pig_pen_pigs.find(ppp => ppp.pig_id === pig.id)
-      console.log("pig: ", pig, ", pig_pen_pig: ", pig_pen_pig)
-      return {...pig, ...pig_pen_pig}
-    })
-    console.log("new pig arr: ", newPigArr)
-
-    this.setState({
-      pigs: newPigArr
-    })
-  }
 
   handleReceivedPig = response => {
-    debugger
-    const { pig } = response;
 
-
-    let foundPig = this.state.pigs.find(s => s.id === pig.id)
-    let arr = this.state.pigs
-
-    if (foundPig) {
-      // console.log("old array: ", arr)
-      const new_arr = arr.map(s => {
-        if (s.id === pig.id) {
-          return pig
-        } else {
-          return s
-        }
-      })
-
-      // console.log("new array: ", new_arr)
-
-      this.setState({
-        pigs: new_arr
-      });
-
+    if (response.removed_pig){
+      let newArr = this.state.pigs.filter(s => s.id !== response.removed_pig)
+      this.setState({pigs: newArr})
     } else {
-      this.setState({
-        pigs: [...arr, pig]
-      });
-      // console.log('new pig')
+
+      const { pig_pen_pig } = response;
+
+      let foundPig = this.state.pigs.find(s => s.id === pig_pen_pig.id)
+      let arr = this.state.pigs
+
+      if (foundPig) { // new pig info is about pig currently in pen
+        const new_arr = arr.map(s => {
+          if (s.id === pig_pen_pig.id) {
+            return pig_pen_pig
+          } else {
+            return s
+          }
+        })
+        this.setState({
+          pigs: new_arr
+        });
+
+      } else { // new pig info is about new pig, entering pen
+        this.setState({
+          pigs: [...arr, pig_pen_pig]
+        });
+      }
     }
   };
 
@@ -97,12 +99,12 @@ class PigPen extends React.Component {
 
   updatePig = (id, x, y, direction) => {
     let arr = this.state.pigs
-    let pig = arr[arr.findIndex(s => s.id === id)]
+    let pig = arr[arr.findIndex(s => s.pig_id === id)]
     // console.log(id, x, y);
     // console.log(arr)
     // console.log(arr[arr.findIndex(s => s.id === id)])
     // console.log("first", pig, id)
-
+    // debugger
     pig.x_coord = x
     pig.y_coord = y
     pig.direction = direction
@@ -120,6 +122,19 @@ class PigPen extends React.Component {
     })
   }
 
+  renderPigs(){
+    return this.state.pigs.map(s => <Pig
+        activePig={parseInt(s.pig_id) === parseInt(this.props.userPig.id)}
+        key={s.id}
+        id={s.id}
+        x={s.x_coord}
+        y={s.y_coord}
+        direction={s.direction}
+        source={s.mediastream}
+        color={s.id % 2 ? "blue" : "red"}
+        updatePig={this.updatePig}/>)
+  }
+
   render() {
     return (
       <div>
@@ -129,8 +144,10 @@ class PigPen extends React.Component {
        />
       {this.state.pigs.map(s => <Pig
           activePig={parseInt(s.pig_id) === parseInt(this.props.userPig.id)}
+          userPig={this.props.userPig}
           key={s.id}
-          id={s.id}
+          id={s.pig_id}
+          pigPenPigId={s.id}
           x={s.x_coord}
           y={s.y_coord}
           direction={s.direction}
@@ -142,4 +159,4 @@ class PigPen extends React.Component {
   }
 }
 
-export default PigPen
+export default LoggedIn(PigPen)

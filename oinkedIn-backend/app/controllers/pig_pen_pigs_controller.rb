@@ -6,9 +6,10 @@ class PigPenPigsController < ApplicationController
     end
 
     def create
-      @pig_pen_pig = PigPenPig.new(pig_pen_pig_params)
-      @pig_pen_pig.id = pig_pen_pig_params[:id]
-      if @pig_pen_pig.save
+      @pig_pen_pig = PigPenPig.find_or_initialize_by(pig_id: params[:pig_id], pig_pen_id: params[:pig_id])
+      if @pig_pen_pig.valid?
+        @pig_pen_pig.save
+        @pig_pen_pig.update(pig_pen_pig_params)
         @pig_pen = @pig_pen_pig.pig_pen
         serialized_data = ActiveModelSerializers::Adapter::Json.new(
           PigPenPigSerializer.new(@pig_pen_pig)
@@ -28,6 +29,15 @@ class PigPenPigsController < ApplicationController
         PigPenPigsChannel.broadcast_to @pig_pen, serialized_data
         head :ok
       end
+    end
+
+    def destroy
+      @pig_pen_pig = PigPenPig.find(params[:id])
+      @pig_pen = @pig_pen_pig.pig_pen
+      data = {removed_pig: @pig_pen_pig.id }
+      @pig_pen_pig.destroy
+      PigPenPigsChannel.broadcast_to(@pig_pen, data)
+      head :ok
     end
 
   private

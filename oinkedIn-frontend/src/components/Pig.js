@@ -8,6 +8,16 @@ class Pig extends React.Component {
 
   componentDidMount = () => {
     window.addEventListener("keydown", this.movePig)
+    window.addEventListener("beforeunload", this.clearPig)
+  }
+
+  clearPig = (e) => {
+    if (this.props.activePig){
+      fetch(`${API_ROOT}/pig_pen_pigs/${this.props.pigPenPigId}`, {
+        method: "DELETE",
+        headers: HEADERS,
+      })
+    }
   }
 
 
@@ -46,8 +56,9 @@ class Pig extends React.Component {
           // this.setState({y: this.state.y + 10})
       }
     }
-    // this.props.updatePig(this.props.id, this.state.x, this.state.y)
   }
+
+
 
   render() {
     // console.log(this.props)

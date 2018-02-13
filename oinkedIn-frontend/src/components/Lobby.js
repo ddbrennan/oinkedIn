@@ -4,11 +4,18 @@ import PigPenItem from "./PigPenItem"
 import { API_ROOT, HEADERS } from '../constants';
 import { ActionCable } from 'react-actioncable-provider';
 import { withRouter } from 'react-router-dom'
+import LoggedIn from "../hoc/LoggedIn"
 
 
 class Lobby extends React.Component {
-  state = {
-    pigPens: []
+  constructor(props){
+    super(props)
+    if (!this.props.userPig){
+      props.history.push("/")
+    }
+    this.state = {
+      pigPens: []
+    }
   }
 
   componentDidMount = () => {
@@ -37,22 +44,35 @@ class Lobby extends React.Component {
       method: "POST",
       headers: HEADERS,
       body: JSON.stringify({
-        pig_id: 1, // replace this, please
+        pig_id: this.props.userPig.id, // replace this, please
         pig_pen_id: pigPen.id,
         direction: 1,
         x_coord: 250,
         y_coord: 250
       })
-    }).then(r => this.props.history.push(`/pigpen/${pigPen.id}`))
+    }).then(console.log).then(r => this.props.history.push(`/pigpen/${pigPen.id}`))
 
 
+  }
+
+  moveThatPiggy = () => {
+    console.log('wuttup')
   }
 
 
   render() {
     return (
       <div className="lobby">
-        {this.props.userPig && <Pig className="lobby-pig" pig={this.state.userPig}/>}
+        {this.props.userPig && <Pig className="lobby-pig"
+          activePig={parseInt(this.props.userPig.pig_id) === parseInt(this.props.userPig.id)}
+          key={this.props.userPig.id}
+          id={this.props.userPig.id}
+          x={this.props.userPig.x_coord}
+          y={this.props.userPig.y_coord}
+          direction={this.props.userPig.direction}
+          source={this.props.userPig.mediastream}
+          color={this.props.userPig.id % 2 ? "blue" : "red"}
+          updatePig={this.moveThatPiggy}/>}
         <button onClick={this.headToHogwash}>Head to the Hogwash!</button>
         <div id="pig-pen-list">
           <ActionCable
@@ -67,7 +87,7 @@ class Lobby extends React.Component {
   }
 }
 
-export default withRouter(Lobby)
+export default LoggedIn(withRouter(Lobby))
 
 // <ActionCable
 // channel={{ channel: 'PigsChannel' }}

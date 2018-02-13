@@ -16,13 +16,11 @@ class PigPensController < ApplicationController
     end
 
     def show
-      pig_pen = PigPen.find(params[:id])
+      pig_pen_pigs = PigPenPig.where(pig_pen_id: params[:id])
       # serialized_data = ActiveModelSerializers::Adapter::Json.new(
       #   PigPenSerializer.new(pig_pen)
       # ).serializable_hash
-      # PigPenPigsChannel.broadcast_to pig_pen, serialized_data
-      # head :ok
-      render json: pig_pen
+      render json: pig_pen_pigs
     end
 
     private
