@@ -5,11 +5,12 @@ class PigPensController < ApplicationController
     end
 
     def create
-      pig_pen = PigPen.new(pig_pen_params)
-      if pig_pen.save
+      @pig_pen = PigPen.new(pig_pen_params)
+      if @pig_pen.save
         serialized_data = ActiveModelSerializers::Adapter::Json.new(
-          PigPenSerializer.new(pig_pen)
+          PigPenSerializer.new(@pig_pen)
         ).serializable_hash
+
         ActionCable.server.broadcast 'pig_pens_channel', serialized_data
         head :ok
       end

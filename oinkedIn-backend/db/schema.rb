@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20180212182027) do
     t.integer "y_coord"
     t.integer "direction"
     t.integer "z_index"
+    t.string "message", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["pig_id"], name: "index_pig_pen_pigs_on_pig_id"
