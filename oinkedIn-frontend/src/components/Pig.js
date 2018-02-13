@@ -11,13 +11,17 @@ class Pig extends React.Component {
     window.addEventListener("beforeunload", this.clearPig)
   }
 
-  clearPig = (e) => {
+  clearPig = () => {
     if (this.props.activePig){
       fetch(`${API_ROOT}/pig_pen_pigs/${this.props.pigPenPigId}`, {
         method: "DELETE",
         headers: HEADERS,
       })
     }
+  }
+
+  componentWillUnmount(){
+    this.clearPig()
   }
 
 
@@ -67,6 +71,7 @@ class Pig extends React.Component {
       <div className="body"style={{
           "top": this.props.x,
           "left": this.props.y,
+          "zIndex": this.props.x,
           "transform": `scaleX(${this.props.direction})`
         }}>
       	<div className="face">

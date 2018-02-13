@@ -135,6 +135,10 @@ class PigPen extends React.Component {
         updatePig={this.updatePig}/>)
   }
 
+  returnToLobby = (e) => {
+    this.props.routerProps.history.push("/lobby")
+  }
+
   render() {
     return (
       <div>
@@ -142,6 +146,9 @@ class PigPen extends React.Component {
        channel={{ channel: 'PigPenPigsChannel', pig_pen: this.state.pigPenId }}
        onReceived={this.handleReceivedPig}
        />
+       <div id="exit-pig-pen" onClick={this.returnToLobby}>
+         Return to Lobby
+       </div>
       {this.state.pigs.map(s => <Pig
           activePig={parseInt(s.pig_id) === parseInt(this.props.userPig.id)}
           userPig={this.props.userPig}

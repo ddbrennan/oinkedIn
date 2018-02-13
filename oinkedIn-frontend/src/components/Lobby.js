@@ -28,7 +28,7 @@ class Lobby extends React.Component {
 
 
   headToHogwash = (e) => {
-    console.log("clicked!")
+    this.props.routerProps.history.push("/hogwash")
   }
 
   handleReceivedPigPen = response => {
@@ -51,8 +51,6 @@ class Lobby extends React.Component {
         y_coord: 250
       })
     }).then(console.log).then(r => this.props.history.push(`/pigpen/${pigPen.id}`))
-
-
   }
 
   moveThatPiggy = () => {

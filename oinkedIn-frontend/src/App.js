@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PigPen from './components/PigPen'
 import Lobby from './components/Lobby'
+import HogWash from './components/HogWash'
 import Welcome from './components/Welcome'
 import { API_ROOT, HEADERS } from './constants';
 
@@ -28,6 +29,7 @@ class App extends Component {
     return (
         <div className="App">
           <Route path="/lobby" render={props => <Lobby routerProps={props} userPig={this.state.userPig}/>} />
+          <Route path="/hogwash" render={props => <HogWash routerProps={props} userPig={this.state.userPig}/>} />
           <Route path="/pigpen/:id" render={props => <PigPen routerProps={props} userPig={this.state.userPig}/>} />
           <Route exact path="/" render={props => <Welcome setUserPig={this.setUserPig}/>} />
         </div>
