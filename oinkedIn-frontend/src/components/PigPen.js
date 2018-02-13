@@ -4,18 +4,44 @@ import { API_ROOT, HEADERS } from '../constants';
 import { ActionCable } from 'react-actioncable-provider';
 
 class PigPen extends React.Component {
-  state = {
-    pigs: [],
-    generatedPig: null
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      pigs: []
+    }
+
+    if (props.routerProps.match) {
+      this.state.pigPenId = props.routerProps.match.params.id
+    }
   }
 
+
   componentDidMount = () => {
-    fetch(`${API_ROOT}/pigs`)
+    fetch(`${API_ROOT}/pig_pens/${this.state.pigPenId}`)
       .then(res => res.json())
-      .then(pigs => this.setState({ pigs }));
+      .then(this.setPigsInState)
+      // .then(pigs => this.setState({ pigs }));
   };
 
+  setPigsInState = (json) => {
+    console.log(json)
+
+
+    const newPigArr = json.pigs.map(pig => {
+      const pig_pen_pig = json.pig_pen_pigs.find(ppp => ppp.pig_id === pig.id)
+      console.log("pig: ", pig, ", pig_pen_pig: ", pig_pen_pig)
+      return {...pig, ...pig_pen_pig}
+    })
+    console.log("new pig arr: ", newPigArr)
+
+    this.setState({
+      pigs: newPigArr
+    })
+  }
+
   handleReceivedPig = response => {
+    debugger
     const { pig } = response;
 
 
@@ -83,7 +109,7 @@ class PigPen extends React.Component {
 
     // console.log("second", pig, id)
 
-    fetch(`${API_ROOT}/pigs/${pig.id}`, {
+    fetch(`${API_ROOT}/pig_pen_pigs/${pig.id}`, {
       method: "PATCH",
       headers: HEADERS,
       body: JSON.stringify(pig)
@@ -95,27 +121,22 @@ class PigPen extends React.Component {
   }
 
   render() {
-    const pigs = this.state.pigs
-    // console.log(pigs)
     return (
       <div>
-        <button onClick={ this.addPig }>Add Pig</button>
-        <div>
-          <ActionCable
-         channel={{ channel: 'PigsChannel' }}
-         onReceived={this.handleReceivedPig}
-         />
-       {this.state.pigs.map(s => <Pig
-            activePig={parseInt(s.id) === parseInt(this.state.generatedPig)}
-            key={s.id}
-            id={s.id}
-            x={s.x_coord}
-            y={s.y_coord}
-            direction={s.direction}
-            source={s.mediastream}
-            color={s.id % 2 ? "blue" : "red"}
-            updatePig={this.updatePig}/>)}
-        </div>
+        <ActionCable
+       channel={{ channel: 'PigPenPigsChannel', pig_pen: this.state.pigPenId }}
+       onReceived={this.handleReceivedPig}
+       />
+      {this.state.pigs.map(s => <Pig
+          activePig={parseInt(s.pig_id) === parseInt(this.props.userPig.id)}
+          key={s.id}
+          id={s.id}
+          x={s.x_coord}
+          y={s.y_coord}
+          direction={s.direction}
+          source={s.mediastream}
+          color={s.id % 2 ? "blue" : "red"}
+          updatePig={this.updatePig}/>)}
       </div>
     )
   }
