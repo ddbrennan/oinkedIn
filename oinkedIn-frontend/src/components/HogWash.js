@@ -44,16 +44,24 @@ class HogWash extends React.Component {
         <div id="exit-pig-pen" onClick={this.returnToLobby}>
           Return to Lobby
         </div>
-        <DisplayOnlyPig color={this.state.color} greased={this.state.greased} fitness={this.state.fitness} />
-        <ColorPicker color={this.state.color} handleColorChoice={this.handleColorChoice}/>
-        <FitnessPicker fitness={this.state.fitness} handleFitnessChoice={this.handleFitnessChoice}/>
-        <label>Greased?
-        <input id="greased" type="checkbox" checked={this.state.greased} onChange={this.handleGreasedChoice}/></label>
-        <div className="update-pig-button" onClick={()=> this.props.updateUserPig(this.state) }>
-          Save Pig
+        <div id="hogwash-display-pig" >
+          <DisplayOnlyPig color={this.state.color} greased={this.state.greased} fitness={this.state.fitness} />
         </div>
-        <div className="update-pig-button" onClick={this.revertPig}>
-          Revert Pig
+        <ColorPicker color={this.state.color} handleColorChoice={this.handleColorChoice}/>
+        <div id="fitness-and-greased">
+          <FitnessPicker fitness={this.state.fitness} handleFitnessChoice={this.handleFitnessChoice}/>
+          <div>
+            <label>Greased?
+            <input id="greased" type="checkbox" checked={this.state.greased} onChange={this.handleGreasedChoice}/></label>
+          </div>
+        </div>
+        <div id="save-or-revert">
+          <div className="update-pig-button" onClick={()=> this.props.updateUserPig(this.state) }>
+            Save Pig
+          </div>
+          <div className="update-pig-button" onClick={this.revertPig}>
+            Revert Pig
+          </div>
         </div>
       </div>
     )

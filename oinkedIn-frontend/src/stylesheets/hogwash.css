@@ -1,0 +1,84 @@
+#hog-wash {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: grid;
+  grid-template-rows: repeat(8, 1fr);
+  align-content: center;
+
+}
+
+
+#save-or-revert {
+  grid-row:8/9;
+  margin:auto;
+}
+
+#save-or-revert div {
+  display: block;
+  float: left;
+  margin: 1em;
+}
+
+.color-picker {
+  /* position: absolute;
+  top: 65%;
+  left: 30%; */
+  margin:auto;
+  grid-row: 6/7;
+  height: 100%;
+  width: 60%;
+}
+
+.color-picker div {
+  height: 100%;
+  width: 13%;
+  display: block;
+  float: left
+}
+
+#fitness-and-greased{
+  margin:auto;
+  grid-row: 7/8;
+  display: block;
+  float: left
+}
+
+#fitness-and-greased > div{
+  display: block;
+  float: left
+}
+
+#hogwash-display-pig > div {
+  position:absolute;
+  display: block;
+  top: 5%;
+  left: 28%;
+  width: 40%;
+}
+
+
+#fitness-picker {
+  height: 20%;
+  display: block;
+  float: left;
+  margin-right: 2em;
+}
+
+.toned-option {
+  height: 100%;
+  width: 10%;
+  display: block;
+  float: left
+}
+
+.pig-color {
+  fill: #EF8C7B;
+}
+
+
+#main-content {
+  width: 80%;
+  margin: auto;
+
+}
