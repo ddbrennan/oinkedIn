@@ -55,20 +55,20 @@ class Pig extends React.Component {
 
         case 38:
           e.preventDefault()
-          return this.props.updatePig(this.props.id, this.props.x - 10, this.props.y, this.props.direction)
-          // this.setState({x: this.state.x - 10})
+          let newNegX = (this.props.x - 4 > -4) ? (this.props.x - 4) : (this.props.x)
+          return this.props.updatePig(this.props.id, newNegX, this.props.y, this.props.direction)
         case 40:
           e.preventDefault()
-          return this.props.updatePig(this.props.id, this.props.x + 10, this.props.y, this.props.direction)
-          // this.setState({x: this.state.x + 10})
+          let newPosX = (this.props.x + 4 < 68) ? (this.props.x + 4) : (this.props.x)
+          return this.props.updatePig(this.props.id, newPosX, this.props.y, this.props.direction)
         case 37:
           e.preventDefault()
-          return this.props.updatePig(this.props.id, this.props.x, this.props.y - 10, 1)
-          // this.setState({y: this.state.y - 10})
+          let newNegY = (this.props.y - 4 > 0) ? (this.props.y - 4) : (this.props.y)
+          return this.props.updatePig(this.props.id, this.props.x, newNegY, 1)
         case 39:
           e.preventDefault()
-          return this.props.updatePig(this.props.id, this.props.x, this.props.y + 10, -1)
-          // this.setState({y: this.state.y + 10})
+          let newPosY = (this.props.y + 4 < 80) ? (this.props.y + 4) : (this.props.y)
+          return this.props.updatePig(this.props.id, this.props.x, newPosY, -1)
         case 8:
           const newMessage = this.state.message.substring(0, this.state.message.length - 1)
           this.setState({message: newMessage})
@@ -102,8 +102,8 @@ class Pig extends React.Component {
     console.log(this.props.message)
     return (
       <div className="body" style={{
-          "top": this.props.x,
-          "left": this.props.y,
+          "top": `${this.props.x}%`,
+          "left": `${this.props.y}%`,
           "zIndex": this.props.x,
           "transform": `scaleX(${this.props.direction})`
         }}>
