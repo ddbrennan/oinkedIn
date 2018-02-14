@@ -3,6 +3,7 @@ import Pig from "./Pig"
 import { API_ROOT, HEADERS } from '../constants';
 import { ActionCable } from 'react-actioncable-provider';
 import LoggedIn from "../hoc/LoggedIn"
+import PenBackground from './PenBackground.js'
 
 
 class PigPen extends React.Component {
@@ -142,6 +143,7 @@ class PigPen extends React.Component {
   render() {
     return (
       <div>
+        <PenBackground />
         <ActionCable
        channel={{ channel: 'PigPenPigsChannel', pig_pen: this.state.pigPenId }}
        onReceived={this.handleReceivedPig}

@@ -1,6 +1,7 @@
 import React from "react";
 import VideoChat from "./VideoChat"
 import { API_ROOT, HEADERS } from '../constants';
+import DisplayOnlyPig from './DisplayOnlyPig'
 
 
 
@@ -67,24 +68,15 @@ class Pig extends React.Component {
   render() {
     // console.log(this.props)
     return (
-
       <div className="body"style={{
           "top": this.props.x,
           "left": this.props.y,
           "zIndex": this.props.x,
           "transform": `scaleX(${this.props.direction})`
         }}>
-      	<div className="face">
-      		<div className="left_ear"></div>
-      		<div className="right_ear"></div>
-      		<div className="eyes"></div>
-      		<div className="nose"></div>
-      	</div>
-      	<div className="stomach">
-      		<div className="left_leg"></div>
-      		<div className="right_leg"></div>
-      	</div>
-      	<div className="tail"></div>
+        <DisplayOnlyPig fitness={this.props.userPig.fitness}
+          greased={this.props.userPig.greased}
+          color={this.props.userPig.color} />
       </div>
 
     )

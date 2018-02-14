@@ -18,14 +18,15 @@ class Welcome extends React.Component {
 
   render() {
     return (
-      <div className="welcome-page">
-        <div id="welcome-message">
-          <h1>Welcome, y'oinker!</h1>
+      <div id="welcome-body">
+        <div id="main-content">
+          <img id="logo" src={require("../images/oinkedIn.png")} />
+          <h3 id="welcome">Welcome, Y'Oinker!</h3>
+          <form onSubmit={ this.handleSubmit }>
+            <input id="new-piggy-name" type="text" value={this.state.pigName} onChange={this.handleChange} placeholder="Type Your Piggy Name..."/>
+            <input type="submit" value="Be A Piggy" hidden/>
+          </form>
         </div>
-        <form id="new-piggy-form" onSubmit={this.handleSubmit}>
-          <input id="new-piggy-name" type="text" value={this.state.pigName} onChange={this.handleChange} placeholder="Type your piggy name..." />
-          <input type="submit" value="Be A Piggy" hidden />
-        </form>
       </div>
     )
   }

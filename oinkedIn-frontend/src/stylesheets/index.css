@@ -38,3 +38,46 @@ body {
 .pig-color {
   fill: #EF8C7B;
 }
+
+#welcome-body {
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ), url('https://kids.nationalgeographic.com/content/dam/kids/photos/animals/Mammals/H-P/pig-young-closeup.ngsversion.1412640764383.jpg');
+  background-size: 100%;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#main-content {
+  width: 80%;
+  margin: auto;
+
+}
+
+#logo {
+  display: block;
+  margin: 5% auto 20%;
+  width: 90%;
+}
+
+#welcome {
+  text-align: center;
+  color: white;
+  font-size: 3.2em;
+  margin: 2%;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+#new-piggy-name {
+  text-align: center;
+  margin: auto;
+  width: 90%;
+  display: block;
+  font-size: 2.5em;
+  padding: .2em;
+  font-family: 'Source Sans Pro', sans-serif;
+}
