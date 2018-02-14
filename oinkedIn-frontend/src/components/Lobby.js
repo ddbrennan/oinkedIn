@@ -39,20 +39,6 @@ class Lobby extends React.Component {
     })
   };
 
-  handlePigPenChoice = (pigPen) => {
-    fetch(`${API_ROOT}/pig_pen_pigs`,{
-      method: "POST",
-      headers: HEADERS,
-      body: JSON.stringify({
-        pig_id: this.props.userPig.id, // replace this, please
-        pig_pen_id: pigPen.id,
-        direction: 1,
-        x_coord: 36,
-        y_coord: 36
-      })
-    }).then(console.log).then(r => this.props.history.push(`/pigpen/${pigPen.id}`))
-  }
-
   moveThatPiggy = () => {
     console.log('wuttup')
   }
@@ -98,7 +84,7 @@ class Lobby extends React.Component {
              <input type="text" value={this.state.newPen.description} name="description" placeholder="Description" onChange={this.handleInputChange}/>
              <input className="submit" type="submit" value="Create Pig Pen"/>
            </form>
-         {this.state.pigPens.map(pP => <PigPenItem key={pP.id} handlePigPenChoice={this.handlePigPenChoice} pigPen={pP}/>)}
+         {this.state.pigPens.map(pP => <PigPenItem key={pP.id} handlePigPenChoice={this.props.handlePigPenChoice} pigPen={pP}/>)}
 
         </div>
       </div>
