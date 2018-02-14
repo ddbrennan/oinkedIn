@@ -1,7 +1,10 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Londrina Solid', sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: .1em;
 }
 
 #hog-wash {
@@ -9,7 +12,7 @@ body {
   width: 100%;
   position: absolute;
   display: grid;
-  
+
 }
 
 .color-picker {
@@ -95,4 +98,26 @@ body {
 
 .pig-pen-list {
   grid-column: 2;
+}
+
+#exit-pig-pen {
+  position: absolute;
+  top: 2%;
+  left: 2%;
+  border: solid 5px black;
+  font-size: 1em;
+  width: auto;
+  z-index: 1001;
+  padding: .5% .75%;
+  background-color: #EF8C7B;
+  font-family: 'Londrina Solid', sans-serif;
+  font-weight: 900;
+  font-size: 2em;
+  letter-spacing: .05em;
+  box-shadow: 2px 2px 6px #333;
+}
+
+#exit-pig-pen:hover {
+  background-color: #e06f5c;
+  box-shadow: 0 0 0 #FFF;
 }

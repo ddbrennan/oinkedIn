@@ -79,11 +79,13 @@ class Lobby extends React.Component {
     return (
       <div className="lobby">
         <div className="lobby-pig-info">
+          <div className="display-pig-wrapper">
         {this.props.userPig && <DisplayOnlyPig className="lobby-pig"
           color={this.props.userPig.color}
           greased={this.props.userPig.greased}
           fitness={this.props.userPig.fitness}
           />}
+          </div>
         <button className="hogwash-button" onClick={this.headToHogwash}>Head to the Hogwash!</button>
         </div>
         <div id="pig-pen-list">
@@ -91,10 +93,10 @@ class Lobby extends React.Component {
            channel={{ channel: 'PigPensChannel' }}
            onReceived={this.handleReceivedPigPen}
            />
-           <form onSubmit={this.createNewPigPen}>
+         <form id="new-pig-pen-form" onSubmit={this.createNewPigPen}>
              <input type="text" value={this.state.newPen.name} name="name" placeholder="Name" onChange={this.handleInputChange}/>
              <input type="text" value={this.state.newPen.description} name="description" placeholder="Description" onChange={this.handleInputChange}/>
-             <input type="submit" value="Create Pig Pen" />
+             <input className="submit" type="submit" value="Create Pig Pen"/>
            </form>
          {this.state.pigPens.map(pP => <PigPenItem key={pP.id} handlePigPenChoice={this.handlePigPenChoice} pigPen={pP}/>)}
 

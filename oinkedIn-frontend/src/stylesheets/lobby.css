@@ -1,0 +1,74 @@
+#pig-pen-list {
+  overflow: scroll;
+  height: 100vh;
+}
+
+#new-pig-pen-form {
+  background-color: #FFF;
+  padding: 1%;
+  margin: 1%;
+  border: solid 5px black;
+}
+
+#new-pig-pen-form input {
+  display: block;
+  width: 95%;
+  margin: 1% auto;
+  font-size: 1.2em;
+  font-family: 'Londrina Solid', sans-serif;
+  letter-spacing: .1em;
+  font-weight: 300;
+}
+
+#new-pig-pen-form input.submit {
+  font-size: 1.2em;
+  background-color: #EEE;
+  font-family: 'Londrina Solid', sans-serif;
+  border: solid 2px black;
+}
+
+#new-pig-pen-form input.submit:hover {
+  background-color: #CCC;
+}
+
+.pig-pen-item {
+  background-color: #FFF;
+  padding: 1%;
+  margin: 1%;
+  border: solid 5px black;
+}
+
+.pig-pen-item:hover {
+  background-color: #DDD;
+}
+
+.display-pig-wrapper > div {
+  position:absolute;
+  display: block;
+  top: 20%;
+  left: 5%;
+  width: 40%;
+}
+
+.hogwash-button {
+  border: solid 5px black;
+  font-size: 1.2em;
+  margin-top: 5%;
+  width: auto;
+  padding: 2%;
+  background-color: #EF8C7B;
+  font-family: 'Londrina Solid', sans-serif;
+  font-weight: 900;
+  font-size: 2em;
+  letter-spacing: .05em;
+  box-shadow: 2px 2px 6px #333;
+}
+
+.hogwash-button:hover {
+  background-color: #e06f5c;
+  box-shadow: 0 0 0 #FFF;
+}
+
+.lobby-pig-info {
+  text-align: center;
+}

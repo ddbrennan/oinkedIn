@@ -7,7 +7,7 @@ const PigPenItem = (props) => {
   return (
     <div onClick={() => props.handlePigPenChoice(props.pigPen)}>
       <div className="pig-pen-item">
-        <h3>{props.pigPen.name}</h3>
+        <h2>{props.pigPen.name}</h2>
         <p>{props.pigPen.description}</p>
       </div>
     </div>

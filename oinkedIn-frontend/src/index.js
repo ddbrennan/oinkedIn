@@ -4,6 +4,7 @@ import { ActionCableProvider } from 'react-actioncable-provider';
 import './stylesheets/index.css';
 import './stylesheets/pig.css';
 import './stylesheets/pen.css';
+import './stylesheets/lobby.css';
 import './stylesheets/welcome.css';
 import './stylesheets/hogwash.css';
 import App from './App';
