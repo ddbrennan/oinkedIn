@@ -75,6 +75,8 @@ class Pig extends React.Component {
           break;
         case 13:
           this.props.sendMessage(this.state.message, this.props.pigPenPigId)
+          this.setState({message: ""})
+          setTimeout(() => this.props.sendMessage("", this.props.pigPenPigId), 3000)
           break;
         default:
           if (e.key.length === 1) {
@@ -87,10 +89,8 @@ class Pig extends React.Component {
 
 
   renderPigMessage = () => {
-    if (this.props.activePig){
-      if (this.state.message) {
-        return <textarea type="text" value={this.state.message} style={{"zIndex":1000}}/>
-      }
+    if (this.props.activePig && this.state.message) {
+      return <textarea type="text" value={this.state.message} style={{"zIndex":1000}}/>
     } else {
       return <div>{this.props.message}</div>
     }

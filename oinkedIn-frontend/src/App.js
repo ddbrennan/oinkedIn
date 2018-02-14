@@ -21,6 +21,7 @@ class App extends Component {
       })
     })
     .then(res => res.json())
+    .then(pig => {console.log(pig); return pig})
     .then(pig => this.setState({userPig: pig}))
     .then(r => this.props.history.push("/lobby"))
   }

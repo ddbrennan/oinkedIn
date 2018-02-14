@@ -21,7 +21,6 @@ class Lobby extends React.Component {
   }
 
   componentDidMount = () => {
-    console.log("hello!")
     fetch(`${API_ROOT}/pig_pens`)
       .then(res => res.json())
       .then(pigpens => this.setState({ pigPens: pigpens }))
@@ -41,7 +40,6 @@ class Lobby extends React.Component {
   };
 
   handlePigPenChoice = (pigPen) => {
-    console.log(this.props.userPig, pigPen)
     fetch(`${API_ROOT}/pig_pen_pigs`,{
       method: "POST",
       headers: HEADERS,

@@ -124,6 +124,7 @@ class PigPen extends React.Component {
   }
 
   sendMessage(message, id){
+    console.log(message, id)
     fetch(`${API_ROOT}/pig_pen_pigs/${id}`, {
       method: "PATCH",
       headers: HEADERS,
