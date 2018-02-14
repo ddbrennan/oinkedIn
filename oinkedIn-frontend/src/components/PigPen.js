@@ -25,7 +25,6 @@ class PigPen extends React.Component {
     fetch(`${API_ROOT}/pig_pens/${this.state.pigPenId}`)
       .then(res => res.json())
       .then(pigs => this.setState({ pigs }))
-      // .then(pigs => this.setState({ pigs }));
   };
 
   // setPigsInState = (json) => {
