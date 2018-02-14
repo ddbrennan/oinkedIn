@@ -49,8 +49,8 @@ class Lobby extends React.Component {
         pig_id: this.props.userPig.id, // replace this, please
         pig_pen_id: pigPen.id,
         direction: 1,
-        x_coord: 250,
-        y_coord: 250
+        x_coord: 36,
+        y_coord: 36
       })
     }).then(console.log).then(r => this.props.history.push(`/pigpen/${pigPen.id}`))
   }

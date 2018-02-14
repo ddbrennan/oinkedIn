@@ -78,7 +78,7 @@ class PigPen extends React.Component {
   addPig = async () => {
     if (!this.state.generatedPig) {
       let id = this.fakeId()
-      let newPig = { x_coord: 300, y_coord: 300, id: id, direction: 1 }
+      let newPig = { x_coord: 30, y_coord: 30, id: id, direction: 1 }
 
       await fetch(`${API_ROOT}/pigs`, {
         method: "POST",
@@ -139,8 +139,6 @@ class PigPen extends React.Component {
         x={s.x_coord}
         y={s.y_coord}
         direction={s.direction}
-        source={s.mediastream}
-        color={s.id % 2 ? "blue" : "red"}
         updatePig={this.updatePig}/>)
   }
 
