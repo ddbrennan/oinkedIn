@@ -1,16 +1,38 @@
 .piggy-thoughts {
-  height: 20%;
-  width: 100%;
+  height: auto;
+  width: auto;
   z-index: 1000;
   position: absolute;
 }
 
-.piggy-thoughts > input {
-  height: 100%;
+.chat-bubble {
+  padding: 10%;
   width: 100%;
-  position: absolute;
+  background-color: white;
+  border: solid 2px black;
+  border-radius: 5px;
+  position: relative;
+  bottom: 60px;
 }
 
+.piggy-thoughts input {
+  height: 1em;
+  font-size: 1em;
+  padding: 2%;
+  width: 100%;
+  position: relative;
+  background-color: white;
+  border: solid 2px black;
+  border-radius: 5px;
+  bottom: 40px;
+}
+
+.name-display {
+  position: absolute;
+  top: 220px;
+  left: 45%;
+  font-size: 2em;
+}
 
 html {
   height: 100%;

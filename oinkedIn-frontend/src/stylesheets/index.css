@@ -81,3 +81,16 @@ body {
   padding: .2em;
   font-family: 'Source Sans Pro', sans-serif;
 }
+
+.lobby {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.lobby-pig-info {
+  grid-column: 1;
+}
+
+.pig-pen-list {
+  grid-column: 2;
+}

@@ -90,9 +90,17 @@ class Pig extends React.Component {
 
   renderPigMessage = () => {
     if (this.props.activePig && this.state.message) {
-      return <textarea type="text" value={this.state.message} style={{"zIndex":1000}}/>
-    } else {
-      return <div>{this.props.message}</div>
+      return(
+        <div className="piggy-thoughts" style={{"transform": `scaleX(${this.props.direction})`}}>
+          <input type="text" value={this.state.message} style={{"zIndex":1000}}/>
+        </div>
+      )
+    } else if (this.props.message) {
+      return(
+        <div className="piggy-thoughts" style={{"transform": `scaleX(${this.props.direction})`}}>
+          <div class="chat-bubble">{this.props.message}</div>
+        </div>
+        )
     }
   }
 
@@ -107,12 +115,14 @@ class Pig extends React.Component {
           "zIndex": this.props.x,
           "transform": `scaleX(${this.props.direction})`
         }}>
-        <div className="piggy-thoughts" style={{"transform": `scaleX(${this.props.direction})`}}>
-          {this.renderPigMessage()}
-        </div>
+        {this.renderPigMessage()}
         <DisplayOnlyPig fitness={this.props.pig.fitness}
           greased={this.props.pig.greased}
           color={this.props.pig.color} />
+        <h3 className="name-display" style={{
+            "transform": `scaleX(${this.props.direction})`
+          }}
+          >{this.props.pig.name}</h3>
       </div>
     )
   }
