@@ -68,7 +68,7 @@ class Pig extends React.Component {
   render() {
     // console.log(this.props)
     return (
-      <div className="body"style={{
+      <div className="body" style={{
           "top": this.props.x,
           "left": this.props.y,
           "zIndex": this.props.x,
