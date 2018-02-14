@@ -32,8 +32,8 @@
 
 .name-display {
   position: absolute;
-  top: 220px;
-  left: 45%;
+  top: 12vh;
+  left: 20%;
   font-size: 2em;
 }
 

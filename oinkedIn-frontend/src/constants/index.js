@@ -1,5 +1,5 @@
-export const API_ROOT = 'http://localhost:3001';
-export const API_WS_ROOT = 'ws://localhost:3001/cable';
+export const API_ROOT = 'http://94dcd25b.ngrok.io';
+export const API_WS_ROOT = 'ws://94dcd25b.ngrok.io/cable';
 
 export const HEADERS = {
   'Content-Type': 'application/json',
