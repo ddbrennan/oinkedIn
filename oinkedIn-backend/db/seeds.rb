@@ -6,9 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# 5 pigs
-
-# 3 pig pens
 
 pen1 = PigPen.create(name: "hog lounge", description: "loungey")
 pen2 = PigPen.create(name: "swine time", description: "it's time!")

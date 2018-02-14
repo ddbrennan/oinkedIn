@@ -7,6 +7,7 @@ class CreatePigPenPigs < ActiveRecord::Migration[5.1]
       t.integer :y_coord
       t.integer :direction
       t.integer :z_index
+      t.string :message, default: ""
 
       t.timestamps
     end

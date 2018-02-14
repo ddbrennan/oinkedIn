@@ -20,7 +20,7 @@ class PigPenPigsController < ApplicationController
     end
 
     def update
-      @pig_pen_pig = PigPenPig.find(pig_pen_pig_params[:id])
+      @pig_pen_pig = PigPenPig.find(params[:id])
       if @pig_pen_pig.update(pig_pen_pig_params)
         @pig_pen = @pig_pen_pig.pig_pen
         serialized_data = ActiveModelSerializers::Adapter::Json.new(
@@ -43,6 +43,6 @@ class PigPenPigsController < ApplicationController
   private
 
   def pig_pen_pig_params
-    params.require(:pig_pen_pig).permit(:id, :pig_id, :pig_pen_id, :direction, :x_coord, :y_coord, :z_index)
+    params.require(:pig_pen_pig).permit(:id, :pig_id, :pig_pen_id, :direction, :x_coord, :y_coord, :z_index, :message)
   end
 end
