@@ -8,11 +8,6 @@
 
 # 5 pigs
 
-david = Pig.create(name: "david", greased: false, color: "blue", fitness: 10)
-matt = Pig.create(name: "matt", greased: false, color: "green", fitness: 1)
-sebastian = Pig.create(name: "sebastian", greased: true, color: "red", fitness: 8)
-kelly = Pig.create(name: "kelly", greased: true, color: "grey", fitness: 7)
-
 # 3 pig pens
 
 pen1 = PigPen.create(name: "hog lounge", description: "loungey")

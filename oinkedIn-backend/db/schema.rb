@@ -37,9 +37,9 @@ ActiveRecord::Schema.define(version: 20180212182027) do
 
   create_table "pigs", force: :cascade do |t|
     t.string "name"
-    t.string "color"
-    t.boolean "greased"
-    t.integer "fitness"
+    t.string "color", default: "#EF8C7B"
+    t.boolean "greased", default: false
+    t.integer "fitness", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

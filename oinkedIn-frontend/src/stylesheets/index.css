@@ -34,3 +34,7 @@ body {
   display: block;
   float: left
 }
+
+.pig-color {
+  fill: #EF8C7B;
+}

@@ -29,9 +29,16 @@ class HogWash extends React.Component {
     this.setState({greased: greased})
   }
 
+  revertPig = () => {
+    this.setState({
+      color: this.props.userPig.color,
+      greased: this.props.userPig.greased,
+      fitness: this.props.userPig.fitness
+    })
+  }
+
 
   render() {
-    console.log(this.state)
     return (
       <div id="hog-wash">
         <div id="exit-pig-pen" onClick={this.returnToLobby}>
@@ -42,10 +49,10 @@ class HogWash extends React.Component {
         <FitnessPicker fitness={this.state.fitness} handleFitnessChoice={this.handleFitnessChoice}/>
         <label>Greased?
         <input id="greased" type="checkbox" checked={this.state.greased} onChange={this.handleGreasedChoice}/></label>
-        <div className="update-pig-button">
-          Save pig
+        <div className="update-pig-button" onClick={()=> this.props.updateUserPig(this.state) }>
+          Save Pig
         </div>
-        <div className="update-pig-button">
+        <div className="update-pig-button" onClick={this.revertPig}>
           Revert Pig
         </div>
       </div>

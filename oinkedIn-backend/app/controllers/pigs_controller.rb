@@ -11,7 +11,7 @@ class PigsController < ApplicationController
     end
 
     def update
-      @pig = Pig.find(pig_params[:id])
+      @pig = Pig.find(params[:id])
       if @pig.update(pig_params)
         render json: @pig
       end

@@ -25,11 +25,21 @@ class App extends Component {
     .then(r => this.props.history.push("/lobby"))
   }
 
+  updateUserPig = (pig) => {
+    // console.log("updating", this.state.userPig.id)
+    fetch(`${API_ROOT}/pigs/${this.state.userPig.id}`, {
+      method: "PATCH",
+      headers: HEADERS,
+      body: JSON.stringify({ pig })
+    }).then(res => res.json())
+    .then(pig => this.setState({userPig: pig}))
+  }
+
   render() {
     return (
         <div className="App">
           <Route path="/lobby" render={props => <Lobby routerProps={props} userPig={this.state.userPig}/>} />
-          <Route path="/hogwash" render={props => <HogWash routerProps={props} userPig={this.state.userPig}/>} />
+          <Route path="/hogwash" render={props => <HogWash routerProps={props} userPig={this.state.userPig} updateUserPig={this.updateUserPig}/>} />
           <Route path="/pigpen/:id" render={props => <PigPen routerProps={props} userPig={this.state.userPig}/>} />
           <Route exact path="/" render={props => <Welcome setUserPig={this.setUserPig}/>} />
         </div>

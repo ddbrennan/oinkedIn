@@ -5,6 +5,7 @@ import { API_ROOT, HEADERS } from '../constants';
 import { ActionCable } from 'react-actioncable-provider';
 import { withRouter } from 'react-router-dom'
 import LoggedIn from "../hoc/LoggedIn"
+import DisplayOnlyPig from "./DisplayOnlyPig"
 
 
 class Lobby extends React.Component {
@@ -61,16 +62,11 @@ class Lobby extends React.Component {
   render() {
     return (
       <div className="lobby">
-        {this.props.userPig && <Pig className="lobby-pig"
-          activePig={parseInt(this.props.userPig.pig_id) === parseInt(this.props.userPig.id)}
-          key={this.props.userPig.id}
-          id={this.props.userPig.id}
-          x={this.props.userPig.x_coord}
-          y={this.props.userPig.y_coord}
-          direction={this.props.userPig.direction}
-          source={this.props.userPig.mediastream}
-          color={this.props.userPig.id % 2 ? "blue" : "red"}
-          updatePig={this.moveThatPiggy}/>}
+        {this.props.userPig && <DisplayOnlyPig className="lobby-pig"
+          color={this.props.userPig.color}
+          greased={this.props.userPig.greased}
+          fitness={this.props.userPig.fitness}
+          />}
         <button onClick={this.headToHogwash}>Head to the Hogwash!</button>
         <div id="pig-pen-list">
           <ActionCable
