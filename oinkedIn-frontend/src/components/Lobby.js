@@ -14,7 +14,8 @@ class Lobby extends React.Component {
       props.history.push("/")
     }
     this.state = {
-      pigPens: []
+      pigPens: [],
+      newPen: {name: "", description: ""}
     }
   }
 
@@ -23,7 +24,6 @@ class Lobby extends React.Component {
     fetch(`${API_ROOT}/pig_pens`)
       .then(res => res.json())
       .then(pigpens => this.setState({ pigPens: pigpens }))
-
   }
 
 
@@ -57,6 +57,23 @@ class Lobby extends React.Component {
     console.log('wuttup')
   }
 
+  handleInputChange = (e) => {
+    const newPen = this.state.newPen
+    this.setState({
+      newPen: {...newPen, [e.target.name]: e.target.value}
+    })
+  }
+
+  createNewPigPen = (e) => {
+    e.preventDefault()
+    const newPen = {id: Date.now(), name: this.state.newPen.name, description: this.state.newPen.description}
+    fetch(`${API_ROOT}/pig_pens`,{
+      method: "POST",
+      headers: HEADERS,
+      body: JSON.stringify(newPen)
+    }).then(r => this.handlePigPenChoice(newPen))
+  }
+
 
   render() {
     return (
@@ -78,7 +95,11 @@ class Lobby extends React.Component {
            onReceived={this.handleReceivedPigPen}
            />
          {this.state.pigPens.map(pP => <PigPenItem key={pP.id} handlePigPenChoice={this.handlePigPenChoice} pigPen={pP}/>)}
-         <button>Create PigPen</button>
+         <form onSubmit={this.createNewPigPen}>
+           <input type="text" value={this.state.newPen.name} name="name" placeholder="Name" onChange={this.handleInputChange}/>
+           <input type="text" value={this.state.newPen.description} name="description" placeholder="Description" onChange={this.handleInputChange}/>
+           <input type="submit" value="Create Pig Pen" />
+         </form>
         </div>
       </div>
     )

@@ -31,7 +31,6 @@ class HogWash extends React.Component {
 
 
   render() {
-    console.log(this.state)
     return (
       <div id="hog-wash">
         <div id="exit-pig-pen" onClick={this.returnToLobby}>

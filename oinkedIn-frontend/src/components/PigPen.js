@@ -122,6 +122,14 @@ class PigPen extends React.Component {
     })
   }
 
+  sendMessage(message, id){
+    fetch(`${API_ROOT}/pig_pen_pigs/${id}`, {
+      method: "PATCH",
+      headers: HEADERS,
+      body: JSON.stringify({message: message})
+    })
+  }
+
   renderPigs(){
     return this.state.pigs.map(s => <Pig
         activePig={parseInt(s.pig_id) === parseInt(this.props.userPig.id)}
@@ -158,7 +166,8 @@ class PigPen extends React.Component {
           x={s.x_coord}
           y={s.y_coord}
           direction={s.direction}
-          source={s.mediastream}
+          message={s.message}
+          sendMessage={this.sendMessage}
           color={s.id % 2 ? "blue" : "red"}
           updatePig={this.updatePig}/>)}
       </div>
