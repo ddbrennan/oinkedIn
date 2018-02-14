@@ -7,6 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-pen1 = PigPen.create(name: "hog lounge", description: "loungey")
-pen2 = PigPen.create(name: "swine time", description: "it's time!")
-pen3 = PigPen.create(name: "wild hogs fans", description: "love late career martin lawrence")
+PigPen.create(name: "hog lounge", description: "loungey")
+PigPen.create(name: "swine time", description: "it's time!")
+PigPen.create(name: "wild hogs fans", description: "love late career martin lawrence")
