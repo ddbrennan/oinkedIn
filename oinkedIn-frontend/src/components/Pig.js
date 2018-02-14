@@ -59,7 +59,7 @@ class Pig extends React.Component {
           return this.props.updatePig(this.props.id, newNegX, this.props.y, this.props.direction)
         case 40:
           e.preventDefault()
-          let newPosX = (this.props.x + 4 < 68) ? (this.props.x + 4) : (this.props.x)
+          let newPosX = (this.props.x + 4 < 80) ? (this.props.x + 4) : (this.props.x)
           return this.props.updatePig(this.props.id, newPosX, this.props.y, this.props.direction)
         case 37:
           e.preventDefault()

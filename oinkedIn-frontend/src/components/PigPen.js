@@ -13,7 +13,7 @@ class PigPen extends React.Component {
 
     this.state = {
       pigs: [],
-      pigPenId: props.routerProps.match.params.id
+      pigPenId: props.pigPen.id
     }
   }
 
@@ -148,7 +148,7 @@ class PigPen extends React.Component {
   }
 
   render() {
-    console.log(this.state.pigs)
+    console.log(this.state.pigPen)
     return (
       <div>
         <PenBackground />
@@ -172,6 +172,11 @@ class PigPen extends React.Component {
           sendMessage={this.sendMessage}
           pig={s.pig}
           updatePig={this.updatePig}/>)}
+        <div className="pig-pen-name-container">
+          <div className="pig-pen-name">
+            {this.props.pigPen.name}
+          </div>
+        </div>
       </div>
     )
   }

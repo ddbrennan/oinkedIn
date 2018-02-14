@@ -9,7 +9,8 @@ import { Route, withRouter } from 'react-router-dom'
 
 class App extends Component {
   state = {
-    userPig: undefined
+    userPig: undefined,
+    pigPen: undefined
   }
 
   setUserPig = (name) => {
@@ -36,12 +37,29 @@ class App extends Component {
     .then(pig => this.setState({userPig: pig}))
   }
 
+  handlePigPenChoice = (pigPen) => {
+    this.setState({
+      pigPen: pigPen
+    })
+    fetch(`${API_ROOT}/pig_pen_pigs`,{
+      method: "POST",
+      headers: HEADERS,
+      body: JSON.stringify({
+        pig_id: this.state.userPig.id, // replace this, please
+        pig_pen_id: pigPen.id,
+        direction: 1,
+        x_coord: 36,
+        y_coord: 36
+      })
+    }).then(r => this.props.history.push(`/pigpen/${pigPen.id}`))
+  }
+
   render() {
     return (
         <div className="App">
-          <Route path="/lobby" render={props => <Lobby routerProps={props} userPig={this.state.userPig}/>} />
+          <Route path="/lobby" render={props => <Lobby routerProps={props} handlePigPenChoice={this.handlePigPenChoice} userPig={this.state.userPig}/>} />
           <Route path="/hogwash" render={props => <HogWash routerProps={props} userPig={this.state.userPig} updateUserPig={this.updateUserPig}/>} />
-          <Route path="/pigpen/:id" render={props => <PigPen routerProps={props} userPig={this.state.userPig}/>} />
+          <Route path="/pigpen/:id" render={props => <PigPen routerProps={props} pigPen={this.state.pigPen} userPig={this.state.userPig}/>} />
           <Route exact path="/" render={props => <Welcome setUserPig={this.setUserPig}/>} />
         </div>
     );
