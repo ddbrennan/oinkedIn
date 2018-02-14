@@ -6,7 +6,7 @@ class PigPenPigsController < ApplicationController
     end
 
     def create
-      @pig_pen_pig = PigPenPig.find_or_initialize_by(pig_id: params[:pig_id], pig_pen_id: params[:pig_id])
+      @pig_pen_pig = PigPenPig.find_or_initialize_by(pig_id: params[:pig_id], pig_pen_id: params[:pig_pen_id])
       if @pig_pen_pig.valid?
         @pig_pen_pig.save
         @pig_pen_pig.update(pig_pen_pig_params)

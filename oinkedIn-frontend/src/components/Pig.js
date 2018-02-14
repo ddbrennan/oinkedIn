@@ -7,6 +7,10 @@ import DisplayOnlyPig from './DisplayOnlyPig'
 
 class Pig extends React.Component {
 
+  state = {
+    message: ""
+  }
+
   componentDidMount = () => {
     window.addEventListener("keydown", this.movePig)
     window.addEventListener("beforeunload", this.clearPig)
@@ -46,27 +50,56 @@ class Pig extends React.Component {
 
   movePig = (e) => {
     if (this.props.activePig) {
+      console.log(e.which)
       switch(e.which) {
-        case 87:
+
+        case 38:
+          e.preventDefault()
           return this.props.updatePig(this.props.id, this.props.x - 10, this.props.y, this.props.direction)
           // this.setState({x: this.state.x - 10})
-        case 83:
+        case 40:
+          e.preventDefault()
           return this.props.updatePig(this.props.id, this.props.x + 10, this.props.y, this.props.direction)
           // this.setState({x: this.state.x + 10})
-        case 65:
+        case 37:
+          e.preventDefault()
           return this.props.updatePig(this.props.id, this.props.x, this.props.y - 10, 1)
           // this.setState({y: this.state.y - 10})
-        case 68:
+        case 39:
+          e.preventDefault()
           return this.props.updatePig(this.props.id, this.props.x, this.props.y + 10, -1)
           // this.setState({y: this.state.y + 10})
+        case 8:
+          const newMessage = this.state.message.substring(0, this.state.message.length - 1)
+          this.setState({message: newMessage})
+          break;
+        case 13:
+          this.props.sendMessage(this.state.message, this.props.pigPenPigId)
+          break;
+        default:
+          if (e.key.length === 1) {
+            const newMessage = this.state.message + e.key.toUpperCase()
+            this.setState({message: newMessage})
+          }
       }
+    }
+  }
+
+
+  renderPigMessage = () => {
+    if (this.props.activePig){
+      if (this.state.message) {
+        return <textarea type="text" value={this.state.message} style={{"zIndex":1000}}/>
+      }
+    } else {
+      return <div>{this.props.message}</div>
     }
   }
 
 
 
   render() {
-    // console.log(this.props)
+    console.log(this.props.message)
     return (
       <div className="body" style={{
           "top": this.props.x,
@@ -74,11 +107,13 @@ class Pig extends React.Component {
           "zIndex": this.props.x,
           "transform": `scaleX(${this.props.direction})`
         }}>
-        <DisplayOnlyPig fitness={this.props.userPig.fitness}
-          greased={this.props.userPig.greased}
-          color={this.props.userPig.color} />
+        <div className="piggy-thoughts" style={{"transform": `scaleX(${this.props.direction})`}}>
+          {this.renderPigMessage()}
+        </div>
+        <DisplayOnlyPig fitness={this.props.pig.fitness}
+          greased={this.props.pig.greased}
+          color={this.props.pig.color} />
       </div>
-
     )
   }
  }
